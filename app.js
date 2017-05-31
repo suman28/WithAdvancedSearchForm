@@ -546,3 +546,7 @@ function ajaxcall(dynamicurl) {
         }
     });
 }
+
+function onAdvSearch(){
+    $('#showHideContainer').toggle();
+}

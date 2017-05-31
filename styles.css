@@ -42,8 +42,6 @@
         padding: 8px 0;
         width: 422px;
     }
-
-    
     /*.tt-suggestion {
     font-size: 22px;
     padding: 3px 20px;
@@ -121,8 +119,9 @@
     body {
         background-color: #f5f5f5;
     }
-    .advanced-search-form{
-        margin-bottom:0rem !important;
+
+    .advanced-search-form {
+        margin-bottom: 0rem !important;
     }
 
     #showHideContainer {
@@ -130,4 +129,12 @@
         padding: 16px;
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #select-icon {
+        background: #ddd;
+        height: 33.5px;
+        padding-top: 6px;
+        margin-bottom: 1px;
+        cursor: pointer;
     }

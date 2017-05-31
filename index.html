@@ -10,6 +10,8 @@
     <!-- Tokenfield CSS -->
     <link href="dist/css/bootstrap-tokenfield.css" type="text/css" rel="stylesheet">
     <link href="styles.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 
 <body>
@@ -18,9 +20,8 @@
         <form class="advanced-search-form" role="form">
             <div class = "input-group">
                <input type = "text" class = "form-control"  id="typeahead" >
-               <i class="fa fa-plus" onclick="onAdvSearch()"></i>
                <span class = "input-group-btn">
-                 <button class="btn btn-primary" type="button" onclick="button1_onclick()">Submit</button>
+                 <i class="material-icons" onclick="onAdvSearch()" id="select-icon">keyboard_arrow_down</i>
                </span>
             </div>
         </form>
