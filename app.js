@@ -5,22 +5,32 @@ var key;
 
 
 $(function() {
-
+    $('#showHideContainer').hide();
 
     var items = [];
     var keywords = [];
     var parse;
     $.when(
-        $.get('/ibi_apps/run.bip?BIP_REQUEST_TYPE=BIP_RUN&BIP_folder=IBFS%253A%252FEDA%252FEDASERVE%252Ftypeahead&BIP_item=procedure_typeahead.fex&windowHandle=436960&IBI_random=4516.2870024981075', function(data) {
-            parse = JSON.parse(data);
-            items = parse.records;
+        // $.get('/ibi_apps/run.bip?BIP_REQUEST_TYPE=BIP_RUN&BIP_folder=IBFS%253A%252FEDA%252FEDASERVE%252Ftypeahead&BIP_item=procedure_typeahead.fex&windowHandle=436960&IBI_random=4516.2870024981075', function(data) {
+        //     parse = JSON.parse(data);
+        //     items = parse.records;
+        // }),
+        // $.get('/ibi_apps/run.bip?BIP_REQUEST_TYPE=BIP_RUN&BIP_folder=IBFS%253A%252FEDA%252FEDASERVE%252Ftypeahead&BIP_item=procedure2.fex&windowHandle=271353&IBI_random=2165.7337772878413', function(data) {
+        //     parse = JSON.parse(data);
+        //     keywords = parse.records;
+        // })
+
+        $.get('data/data.json', function (data) {
+            //store records in items array
+            items = data.records;
         }),
-        $.get('/ibi_apps/run.bip?BIP_REQUEST_TYPE=BIP_RUN&BIP_folder=IBFS%253A%252FEDA%252FEDASERVE%252Ftypeahead&BIP_item=procedure2.fex&windowHandle=271353&IBI_random=2165.7337772878413', function(data) {
-            parse = JSON.parse(data);
-            keywords = parse.records;
+
+
+        //get json from second record
+        $.get('data/data1.json', function (data) {
+            //store records in keywords array
+            keywords = data.records;
         })
-
-
 
 
     ).then(function() {
@@ -92,6 +102,74 @@ $(function() {
                         } else {
                             return item.KEYWORD;
                         }
+                    }
+                },
+                source: config.ttAdapter(),
+                templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'Unable to find any match',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function(data) {
+                        var _suggestion = '';
+                        if (data.TBNAME) {
+                            _suggestion = "<div>" +
+                                data.value +
+                                " in " +
+                                data.TBNAME + "</div>";
+                        } else {
+                            _suggestion = "<div>" +
+                                data.value + "</div>";
+                        }
+                        return _suggestion;
+                    }
+                }
+            }]
+        });
+
+        $('#verb').tokenfield({
+            typeahead: [null, {
+                name: 'config',
+                displayKey: function(item) {
+                    if (item) {
+                        if (item.value) {
+                            return item.value;
+                        } 
+                    }
+                },
+                source: config.ttAdapter(),
+                templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'Unable to find any match',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function(data) {
+                        var _suggestion = '';
+                        if (data.TBNAME) {
+                            _suggestion = "<div>" +
+                                data.value +
+                                " in " +
+                                data.TBNAME + "</div>";
+                        } else {
+                            _suggestion = "<div>" +
+                                data.value + "</div>";
+                        }
+                        return _suggestion;
+                    }
+                }
+            }]
+        });
+
+        $('#by').tokenfield({
+            typeahead: [null, {
+                name: 'config',
+                displayKey: function(item) {
+                    if (item) {
+                        if (item.value) {
+                            return item.value;
+                        } 
                     }
                 },
                 source: config.ttAdapter(),
